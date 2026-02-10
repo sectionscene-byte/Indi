@@ -40,7 +40,6 @@ body {
   justify-content: center;
   padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
 
-  /* 🔥 Фоновая картинка */
   background:
     linear-gradient(
       rgba(0,0,0,0.25),
@@ -62,7 +61,6 @@ body {
 
   background: var(--glass);
 
-  /* 🔹 Блюр 5px */
   backdrop-filter: blur(5px) saturate(180%);
   -webkit-backdrop-filter: blur(5px) saturate(180%);
 
@@ -272,30 +270,27 @@ p {
   </div>
 
 </div>
+
+<!-- 🔊 Музыка -->
 <audio id="background-music" src="muz.mp3" loop></audio>
 
 <script>
-// Попытка автоматически включить музыку
-const music = document.getElementById('background-music');
-
-// Функция для запуска музыки
-function playMusic() {
-  music.play().catch(() => {
-    // Если авто-плей не сработал, подождем клика/тапа
-    document.body.addEventListener('click', () => music.play(), { once: true });
-    document.body.addEventListener('touchstart', () => music.play(), { once: true });
-  });
-}
-
-// Запускаем при загрузке страницы
-window.addEventListener('load', playMusic);
-
 /* haptic-like tap */
 document.querySelectorAll('.links a').forEach(link => {
   link.addEventListener('touchstart', () => {
     if (navigator.vibrate) navigator.vibrate(8);
   });
 });
+
+// Авто-запуск музыки
+const music = document.getElementById('background-music');
+function playMusic() {
+  music.play().catch(() => {
+    document.body.addEventListener('click', () => music.play(), { once: true });
+    document.body.addEventListener('touchstart', () => music.play(), { once: true });
+  });
+}
+window.addEventListener('load', playMusic);
 </script>
 
 </body>
