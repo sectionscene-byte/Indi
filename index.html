@@ -61,18 +61,26 @@ body {
   padding: 28px 20px 32px;
   border-radius: 32px;
 
+  /* Стеклянный фон */
   background: var(--glass);
-  backdrop-filter: var(--blur) saturate(180%);
-  -webkit-backdrop-filter: var(--blur) saturate(180%);
 
-  border: 1px solid var(--stroke);
+  /* Размытие 20px + насыщение */
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+
+  /* Бордюр и тень для эффекта стекла */
+  border: 1px solid rgba(255,255,255,0.35);
   box-shadow:
     0 30px 60px rgba(0,0,0,0.35),
     inset 0 1px 0 rgba(255,255,255,0.25);
 
   text-align: center;
   animation: appear 0.7s cubic-bezier(.2,.8,.2,1);
+
+  /* Дополнительно: плавный переход при hover (мягче) */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 
 @keyframes appear {
   from {
@@ -191,3 +199,4 @@ document.querySelectorAll('.links a').forEach(link => {
 
 </body>
 </html>
+
