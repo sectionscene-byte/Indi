@@ -41,10 +41,7 @@ body {
   padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
 
   background:
-    linear-gradient(
-      rgba(0,0,0,0.25),
-      rgba(0,0,0,0.25)
-    ),
+    linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)),
     url("fon.jpg");
   background-size: cover;
   background-position: center;
@@ -71,9 +68,9 @@ body {
 
   text-align: center;
   animation: appear 0.7s cubic-bezier(.2,.8,.2,1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Анимация */
 @keyframes appear {
   from {
     opacity: 0;
@@ -90,7 +87,6 @@ body {
   position: relative;
   display: inline-block;
   border-radius: 20px;
-  overflow: visible;
   margin-bottom: 18px;
 }
 
@@ -224,8 +220,33 @@ p {
   border-radius: 16px;
   object-fit: cover;
 }
+
+/* 🎬 Видео плеер */
+.video-box {
+  margin-top: 26px;
+  border-radius: 20px;
+  overflow: hidden;
+
+  background: var(--glass);
+  border: 1px solid rgba(255,255,255,0.25);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 14px 30px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.video-box video {
+  width: 100%;
+  display: block;
+  border-radius: 20px;
+  outline: none;
+}
 </style>
 </head>
+
 <body>
 
 <div class="card">
@@ -238,7 +259,7 @@ p {
   <h1>raindi.one</h1>
   <p>Мои каналы и соцсети</p>
 
-  <!-- Ссылки -->
+  <!-- Ссылки с иконками -->
   <div class="links">
     <a href="https://www.instagram.com/raindi.one/" target="_blank">
       <svg viewBox="0 0 24 24">
@@ -262,17 +283,22 @@ p {
     </a>
   </div>
 
-  <!-- Три бокса с картинками -->
+  <!-- Три бокса -->
   <div class="image-boxes">
     <div class="box"><img src="1.jpg" alt="1"></div>
     <div class="box"><img src="2.jpg" alt="2"></div>
     <div class="box"><img src="3.jpg" alt="3"></div>
   </div>
 
-</div>
+  <!-- Видео -->
+  <div class="video-box">
+    <video controls playsinline preload="metadata">
+      <source src="Video.mp4" type="video/mp4">
+      Ваш браузер не поддерживает видео.
+    </video>
+  </div>
 
-<!-- 🔊 Музыка -->
-<audio id="background-music" src="muz.mp3" loop></audio>
+</div>
 
 <script>
 /* haptic-like tap */
@@ -281,16 +307,6 @@ document.querySelectorAll('.links a').forEach(link => {
     if (navigator.vibrate) navigator.vibrate(8);
   });
 });
-
-// Авто-запуск музыки
-const music = document.getElementById('background-music');
-function playMusic() {
-  music.play().catch(() => {
-    document.body.addEventListener('click', () => music.play(), { once: true });
-    document.body.addEventListener('touchstart', () => music.play(), { once: true });
-  });
-}
-window.addEventListener('load', playMusic);
 </script>
 
 </body>
