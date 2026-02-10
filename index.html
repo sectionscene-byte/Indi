@@ -272,8 +272,24 @@ p {
   </div>
 
 </div>
+<audio id="background-music" src="muz.mp3" loop></audio>
 
 <script>
+// Попытка автоматически включить музыку
+const music = document.getElementById('background-music');
+
+// Функция для запуска музыки
+function playMusic() {
+  music.play().catch(() => {
+    // Если авто-плей не сработал, подождем клика/тапа
+    document.body.addEventListener('click', () => music.play(), { once: true });
+    document.body.addEventListener('touchstart', () => music.play(), { once: true });
+  });
+}
+
+// Запускаем при загрузке страницы
+window.addEventListener('load', playMusic);
+
 /* haptic-like tap */
 document.querySelectorAll('.links a').forEach(link => {
   link.addEventListener('touchstart', () => {
